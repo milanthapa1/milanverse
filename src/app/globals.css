@@ -1,0 +1,336 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-geist-mono);
+  --font-heading: var(--font-sans);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-glow: var(--glow);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+/* ============================================================
+   LIGHT THEME — soft "daybreak" palette (designed, not inverted)
+   ============================================================ */
+:root {
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+
+  --background: #ffffff;
+  --foreground: #101531;
+  --card: #ffffff;
+  --card-foreground: #101531;
+  --popover: #ffffff;
+  --popover-foreground: #101531;
+  --primary: #6d4aff;
+  --primary-foreground: #ffffff;
+  --secondary: #eceef9;
+  --secondary-foreground: #262c50;
+  --muted: #eceff8;
+  --muted-foreground: #646c92;
+  --accent: #ece8ff;
+  --accent-foreground: #4b35c7;
+  --destructive: #e11d48;
+  --border: rgb(16 21 49 / 10%);
+  --input: rgb(16 21 49 / 15%);
+  --ring: #6d4aff;
+  --glow: rgb(109 74 255 / 18%);
+  --chart-1: #6d4aff;
+  --chart-2: #0ea5e9;
+  --chart-3: #d946ef;
+  --chart-4: #16a34a;
+  --chart-5: #f59e0b;
+  --radius: 0.75rem;
+  --sidebar: #ffffff;
+  --sidebar-foreground: #101531;
+  --sidebar-primary: #6d4aff;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #eceef9;
+  --sidebar-accent-foreground: #262c50;
+  --sidebar-border: rgb(16 21 49 / 10%);
+  --sidebar-ring: #6d4aff;
+}
+
+/* ============================================================
+   DARK THEME — deep-space navy (default)
+   ============================================================ */
+.dark {
+  --background: #070b1a;
+  --foreground: #e9edf9;
+  --card: #0b1020;
+  --card-foreground: #e9edf9;
+  --popover: #0d1326;
+  --popover-foreground: #e9edf9;
+  --primary: #7c5cff;
+  --primary-foreground: #ffffff;
+  --secondary: #131a33;
+  --secondary-foreground: #c9d1ee;
+  --muted: #111735;
+  --muted-foreground: #8b93b0;
+  --accent: #1a2145;
+  --accent-foreground: #d9def7;
+  --destructive: #ff5c7a;
+  --border: rgb(148 163 255 / 12%);
+  --input: rgb(148 163 255 / 16%);
+  --ring: #7c5cff;
+  --glow: rgb(124 92 255 / 30%);
+  --chart-1: #7c5cff;
+  --chart-2: #22d3ee;
+  --chart-3: #e879f9;
+  --chart-4: #34d399;
+  --chart-5: #fbbf24;
+  --sidebar: #090e1f;
+  --sidebar-foreground: #c9d1ee;
+  --sidebar-primary: #7c5cff;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #141b38;
+  --sidebar-accent-foreground: #e9edf9;
+  --sidebar-border: rgb(148 163 255 / 10%);
+  --sidebar-ring: #7c5cff;
+}
+
+/* ============================================================
+   Base
+   ============================================================ */
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    @apply font-sans scroll-smooth;
+  }
+  body {
+    @apply bg-background text-foreground;
+    background-attachment: fixed;
+    min-height: 100vh;
+  }
+  /* Layered nebula glows behind everything — dark theme only.
+     Light theme stays a clean, flat white. */
+  .dark body {
+    background-image:
+      radial-gradient(55rem 35rem at 85% -10%, var(--nebula-a), transparent 60%),
+      radial-gradient(45rem 30rem at -10% 30%, var(--nebula-b), transparent 65%),
+      radial-gradient(38rem 26rem at 50% 115%, var(--nebula-c), transparent 70%);
+  }
+  ::selection {
+    background: color-mix(in oklch, var(--primary) 35%, transparent);
+  }
+  /* Visible, accessible focus rings everywhere. */
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+}
+
+/* Nebula tints per theme */
+:root {
+  --nebula-a: rgb(109 74 255 / 8%);
+  --nebula-b: rgb(14 165 233 / 6%);
+  --nebula-c: rgb(217 70 239 / 5%);
+}
+.dark {
+  --nebula-a: rgb(124 92 255 / 14%);
+  --nebula-b: rgb(34 211 238 / 7%);
+  --nebula-c: rgb(232 121 249 / 6%);
+}
+
+/* ============================================================
+   MilanVerse component utilities
+   ============================================================ */
+
+/* Glass surface — search bars, docks, floating chrome */
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  border: 1px solid var(--glass-border);
+}
+:root {
+  --glass-bg: rgb(255 255 255 / 72%);
+  --glass-border: rgb(16 21 49 / 10%);
+  --glass-nav-bg: rgb(255 255 255 / 65%);
+}
+.dark {
+  --glass-bg: rgb(11 16 32 / 62%);
+  --glass-border: rgb(148 163 255 / 14%);
+  --glass-nav-bg: rgb(9 14 31 / 55%);
+}
+
+/* Frosted-glass navbar — stronger blur + translucency and a soft lift shadow
+   so it reads as real glass over scrolling content in both themes. */
+.glass-nav {
+  background: var(--glass-nav-bg);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 12px 32px -20px rgb(16 21 49 / 45%);
+}
+.dark .glass-nav {
+  box-shadow: 0 12px 32px -20px rgb(0 0 0 / 80%);
+}
+
+/* Soft violet bloom behind hero content */
+.glow-violet {
+  box-shadow: 0 0 0 1px var(--glow), 0 8px 40px -12px var(--glow);
+}
+
+/* Card glow on hover (links / categories) */
+.glow-hover {
+  transition: box-shadow 0.25s ease, transform 0.25s ease, border-color 0.25s ease;
+}
+.glow-hover:hover {
+  box-shadow: 0 0 0 1px color-mix(in oklch, var(--glow) 60%, transparent),
+    0 14px 38px -16px var(--glow);
+  border-color: color-mix(in oklch, var(--primary) 40%, transparent);
+}
+
+/* Gradient headline text */
+.text-gradient {
+  background: linear-gradient(100deg, var(--foreground) 20%, var(--primary) 60%, #22d3ee 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.dark .text-gradient {
+  background: linear-gradient(100deg, #ffffff 15%, #a78bfa 55%, #22d3ee 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Ambient aurora blob (landing hero) */
+.aurora {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(80px);
+  opacity: 0.5;
+  pointer-events: none;
+  animation: aurora-drift 18s ease-in-out infinite alternate;
+}
+
+/* Horizontal scroll rows (mobile category dock) */
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Highlighted search matches */
+mark.search-hit {
+  background: color-mix(in oklch, var(--primary) 25%, transparent);
+  color: inherit;
+  border-radius: 4px;
+  padding: 0 0.15em;
+}
+
+/* ============================================================
+   Motion
+   ============================================================ */
+@keyframes aurora-drift {
+  from {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  to {
+    transform: translate3d(4%, 6%, 0) scale(1.12);
+  }
+}
+
+@keyframes float-y {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes pulse-glow {
+  0%,
+  100% {
+    opacity: 0.45;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes shimmer {
+  from {
+    background-position: -200% 0;
+  }
+  to {
+    background-position: 200% 0;
+  }
+}
+
+.animate-float {
+  animation: float-y 5s ease-in-out infinite;
+}
+.animate-pulse-slow {
+  animation: pulse-glow 3.4s ease-in-out infinite;
+}
+.skeleton-shimmer {
+  background: linear-gradient(
+    90deg,
+    color-mix(in oklch, var(--muted) 80%, transparent) 25%,
+    color-mix(in oklch, var(--muted) 40%, transparent) 50%,
+    color-mix(in oklch, var(--muted) 80%, transparent) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.8s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .aurora {
+    animation: none;
+  }
+}
