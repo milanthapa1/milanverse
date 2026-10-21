@@ -265,7 +265,10 @@ export function AddLinkDialog({ categories }: AddLinkDialogProps) {
     <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogTrigger
         render={
-          <Button size="sm" className="gap-1.5 shadow-sm">
+          <Button
+            size="sm"
+            className="gap-1.5 bg-[#d97757] text-white shadow-sm hover:bg-[#c4633f]"
+          >
             <Plus className="size-4" aria-hidden />
             <span>Add link</span>
           </Button>
