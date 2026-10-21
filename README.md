@@ -112,7 +112,7 @@ Fill in:
 | `AUTH_URL`                                 | auth     | Public base URL, e.g. `http://localhost:3000`                |
 | `AUTH_GOOGLE_ID` / `AUTH_GOOGLE_SECRET`    | optional | Enables Google sign-in                                       |
 | `AUTH_GITHUB_ID` / `AUTH_GITHUB_SECRET`    | optional | Enables GitHub sign-in                                       |
-| `NEXT_PUBLIC_APP_URL`                      | yes      | Canonical URL for metadata, OG images and share links         |
+| `APP_URL`                                  | yes      | Canonical URL for metadata, OG images and share links (server-only) |
 | `FEATURE_AVATAR_UPLOAD`, `CLOUDINARY_*`     | no       | Scaffolded flag; avatar upload is not part of the MVP        |
 
 `AUTH_SECRET` is mandatory whenever any OAuth provider is configured.
@@ -395,7 +395,7 @@ database or network is required.
 2. Import the repository into Vercel.
 3. Set the environment variables from `.env.example` in the project settings —
    at minimum `DATABASE_URL`, `DIRECT_URL`, `AUTH_SECRET`, `AUTH_URL`,
-   `NEXT_PUBLIC_APP_URL` and your OAuth credentials.
+   `APP_URL` and your OAuth credentials.
 4. Set both OAuth callback URLs to
    `https://your-domain/api/auth/callback/{google,github}`.
 5. Apply migrations once from your machine (or a CI step) with production
@@ -408,7 +408,7 @@ database or network is required.
 6. Deploy. The build runs `next build`; migrations are intentionally separate
    from the build so deployments never race each other on schema changes.
 
-`AUTH_URL` and `NEXT_PUBLIC_APP_URL` must match the deployed origin, or OAuth
+`AUTH_URL` and `APP_URL` must match the deployed origin, or OAuth
 redirects and share/OG links will point at the wrong host.
 
 ### Notes for production

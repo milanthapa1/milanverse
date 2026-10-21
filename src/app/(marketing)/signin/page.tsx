@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { connection } from "next/server";
 import { Suspense } from "react";
-import { ArrowRight, ShieldCheck, Sparkles } from "lucide-react";
+import { ArrowRight, ShieldCheck } from "lucide-react";
 import { ProviderButton } from "@/components/auth/provider-buttons";
 import { Logo } from "@/components/layout/logo";
 import { ThemeToggle } from "@/components/layout/theme-toggle";
@@ -48,9 +48,7 @@ async function SignInCard({ searchParams }: { searchParams: SearchParams }) {
   return (
     <div className="glass w-full max-w-md rounded-2xl border border-white/10 p-8">
       <div className="flex flex-col items-center text-center">
-        <span className="grid size-12 place-items-center rounded-2xl bg-primary/15 text-primary">
-          <Sparkles className="size-6" aria-hidden />
-        </span>
+        <Logo href="/" />
         <h1 className="mt-5 text-2xl font-bold tracking-tight">
           Sign in to your universe
         </h1>
